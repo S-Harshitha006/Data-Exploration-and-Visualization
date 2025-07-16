@@ -1,0 +1,23 @@
+# Sample dataset: Employee work hours
+data_b = {
+    'Employee': ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank'],
+    'Department': ['HR', 'HR', 'IT', 'IT', 'Sales', 'Sales'],
+    'Work_Hours': [40, 38, 45, 42, 50, 48]
+}
+
+df_b = pd.DataFrame(data_b)
+
+# Group by department to get total hours
+grouped_hours = df_b.groupby('Department')['Work_Hours'].sum().reset_index()
+print("\nTotal Work Hours by Department:\n")
+print(grouped_hours)
+
+# Pivot table (though here it's similar to grouped result)
+pivot_b = pd.pivot_table(df_b, values='Work_Hours', index='Department', aggfunc=[np.sum, np.mean])
+pivot_b.columns = ['Total_Hours', 'Average_Hours']
+print("\nWork Hours Summary Pivot Table:\n")
+print(pivot_b)
+
+# Identify department with highest average hours
+top_avg_dept = pivot_b['Average_Hours'].idxmax()
+print(f"\nDepartment with highest average working hours: {top_avg_dept}")
