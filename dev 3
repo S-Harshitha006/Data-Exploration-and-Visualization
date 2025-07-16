@@ -1,0 +1,95 @@
+# STEP 1: Import Libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# ---------------------------------
+# NUMPY ARRAYS
+# ---------------------------------
+print("===== NUMPY ARRAYS =====")
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+print("Array:\n", arr)
+print("Array dimension:", arr.ndim)
+print("Array shape:", arr.shape)
+print("Array size:", arr.size)
+print("Array datatype:", arr.dtype)
+
+# Slicing
+print("\nSlicing:")
+print(arr[1, :])           # Second row
+print(arr[:, 2])           # Third column
+print(arr[0:2, 1])         # Second column values
+print("Last element:", arr[-1, -1])
+
+# More Array Operations
+print("\nMore slicing and column access:")
+my_array = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+print("Original array:\n", my_array)
+print("2nd column:", my_array[:, 1])
+print("3rd column:", my_array[:, 2])
+print("1st & 4th column:\n", my_array[:, [0, 3]])
+
+# ---------------------------------
+# PANDAS DATAFRAME
+# ---------------------------------
+print("\n===== PANDAS DATAFRAMES =====")
+data = {'name': ['A', 'B', 'C', 'D'],
+        'physics': [70, 85, 90, 95],
+        'chemistry': [60, 80, 70, 90]}
+
+df = pd.DataFrame(data)
+print("DataFrame:\n", df)
+
+# Average of physics column
+print("Average of physics:", df['physics'].mean())
+
+# ---------------------------------
+# BASIC PLOT USING MATPLOTLIB
+# ---------------------------------
+print("\n===== BASIC PLOT =====")
+x = [1, 2, 3]
+y = [2, 5, 1]
+
+plt.plot(x, y)
+plt.title('My first graph')
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+plt.grid(True)
+plt.show()
+
+# ---------------------------------
+# MULTIPLE SUBPLOTS
+# ---------------------------------
+print("\n===== MULTIPLE SUBPLOTS =====")
+x = np.array([1, 2, 3, 4, 5])
+y1 = np.array([1, 4, 9, 16, 25])
+y2 = np.array([25, 20, 15, 10, 5])
+y3 = np.array([3, 6, 9, 12, 15])
+y4 = np.array([1, 2, 1, 2, 1])
+
+plt.figure(figsize=(10, 6))
+
+plt.subplot(2, 2, 1)
+plt.scatter(x, y1, color='blue')
+plt.title("1st Subplot")
+
+plt.subplot(2, 2, 2)
+plt.scatter(x, y2, color='red')
+plt.title("2nd Subplot")
+
+plt.subplot(2, 2, 3)
+plt.scatter(x, y3, color='green')
+plt.title("3rd Subplot")
+
+plt.subplot(2, 2, 4)
+plt.scatter(x, y4, color='magenta')
+plt.title("4th Subplot")
+
+plt.tight_layout()
+plt.show()
+
+# ---------------------------------
+# RESULT
+# ---------------------------------
+print("\nRESULT:")
+print("Execution with NumPy Arrays, Pandas DataFrame, and Basic Plots using Matplotlib in Python (PyCharm) is successful.")
