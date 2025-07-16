@@ -1,0 +1,32 @@
+import pandas as pd
+import numpy as np
+
+# Sample dataset: Weekly temperature records
+data_a = {
+    'City': ['New York', 'New York', 'Los Angeles', 'Los Angeles', 'Chicago', 'Chicago', 'New York', 'Los Angeles', 'Chicago'],
+    'Date': pd.to_datetime(['2025-06-01', '2025-07-15', '2025-06-10', '2025-07-20', '2025-06-05', '2025-07-25', '2025-08-01', '2025-08-10', '2025-08-15']),
+    'Temperature': [85, 90, 88, 92, 80, 87, 95, 98, 91]
+}
+
+df_a = pd.DataFrame(data_a)
+
+# Extract month
+df_a['Month'] = df_a['Date'].dt.strftime('%B')
+
+# Group by City and Month and sum the temperature
+monthly_sum = df_a.groupby(['City', 'Month'])['Temperature'].sum().reset_index()
+
+# Pivot to get a month-wise summary table
+pivot_a = monthly_sum.pivot(index='City', columns='Month', values='Temperature').fillna(0)
+print("Monthly Temperature Summary by City:\n")
+print(pivot_a)
+
+# Define summer months
+summer_months = ['June', 'July', 'August']
+
+# Sum summer temperatures per city
+pivot_a['Summer Total'] = pivot_a[summer_months].sum(axis=1)
+
+# Identify city with highest total temperature in summer
+hottest_city = pivot_a['Summer Total'].idxmax()
+print(f"\nCity with highest total summer temperature: {hottest_city}")
