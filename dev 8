@@ -1,0 +1,25 @@
+import requests
+import os
+
+# Download the world shapefile
+world_shapefile_url = "https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/ne_110m_admin_0_countries.zip"
+world_shapefile_zip_path = "/content/ne_110m_admin_0_countries.zip"
+world_shapefile_dir = "/content/"
+
+print(f"Downloading {world_shapefile_url}...")
+response = requests.get(world_shapefile_url)
+if response.status_code == 200:
+    with open(world_shapefile_zip_path, 'wb') as f:
+        f.write(response.content)
+    print("Download complete.")
+
+    # Unzip the shapefile
+    import zipfile
+    with zipfile.ZipFile(world_shapefile_zip_path, 'r') as zip_ref:
+        zip_ref.extractall(world_shapefile_dir)
+    print(f"Shapefile extracted to {world_shapefile_dir}")
+else:
+    print(f"Failed to download shapefile. Status code: {response.status_code}")
+
+# Note: You will need to manually upload or programmatically download the India shapefiles
+# (gadm41_IND_1.shp and gadm41_IND_2.shp) to the /content/ directory as well
